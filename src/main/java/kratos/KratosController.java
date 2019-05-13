@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,9 +24,9 @@ public class KratosController {
         return "Greetings from Kratos!";
     }
 
-    @RequestMapping(path = "/request/{transactionId}", method = RequestMethod.GET)
-    public String checkTransaction(@PathVariable String transactionId) {
-        return "{\"chunks\": 3]}";
+    @RequestMapping(path = "/start/{transactionId}", method = RequestMethod.POST)
+    public ResponseEntity<String> checkTransaction(@PathVariable String transactionId) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(path = "/request/{transactionId}/chunk/{chunkId}", method = RequestMethod.GET)
@@ -41,8 +42,8 @@ public class KratosController {
                 .contentType(MediaType.parseMediaType("application/octet-stream")).body(resource);
     }
 
-    @RequestMapping(path = "/request/{transactionId}", method = RequestMethod.DELETE)
-    public void deleteTransaction(@PathVariable String transactionId) {
-        return;
+    @RequestMapping(path = "/ack/{transactionId}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteTransaction(@PathVariable String transactionId) {
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
