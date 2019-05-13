@@ -25,7 +25,7 @@ public class KratosController {
 
     @RequestMapping(path = "/request/{transactionId}", method = RequestMethod.GET)
     public String checkTransaction(@PathVariable String transactionId) {
-        return "{\"chunks\": [\"1\"]}";
+        return "{\"chunks\": 3]}";
     }
 
     @RequestMapping(path = "/request/{transactionId}/chunk/{chunkId}", method = RequestMethod.GET)
@@ -33,7 +33,7 @@ public class KratosController {
             throws IOException {
 
         final String workDir = Paths.get("").toAbsolutePath().toString();
-        final File file = new File(workDir + "/some.txt.zip");
+        final File file = new File(workDir + "/chunked-files/" + chunkId);
         final InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
         final HttpHeaders headers = new HttpHeaders();
 

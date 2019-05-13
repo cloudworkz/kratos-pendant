@@ -1,0 +1,1 @@
+split -b 83886 ./original.txt.zip ./
